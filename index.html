@@ -8,22 +8,36 @@
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
     <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
     <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
-    <model-viewer bounds="tight" enable-pan src="suit_arash4.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1">
+    <script>
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+          get: (searchParams, prop) => searchParams.get(prop),
+        });
+      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+      let value = params.path; // "some_value"
+      let html = `
+    <model-viewer class="model-viewer" bounds="tight" enable-pan src=${value} ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" poster="S.webp" shadow-intensity="1" style="height: 100%; width: 100%;">
+      <img src="viubox_logo22.webp" width="64px" height="64px" alt="ViuBox SYZ Logo" draggable="false">
       <div class="progress-bar hide" slot="progress-bar">
-          <div class="update-bar"></div>
+        <div class="update-bar"></div>
       </div>
       <button slot="ar-button" id="ar-button">
-          View in Augmented Reality
+        View in Augmented Reality
       </button>
       <div id="ar-prompt">
-          <img src="ar_hand_prompt.png">
+        <img src="ar_hand_prompt.png">
       </div>
-    </model-viewer>  
+    </model-viewer>
+    `
+    $('body').append(html);
+    </script>
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
   </body>
 </html>
