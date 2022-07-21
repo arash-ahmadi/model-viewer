@@ -32,4 +32,4 @@ jobs:
               git pull https://arash-ahmadi:${{ secrets.GH_KEY }}@github.com/arash-ahmadi/model-viewer.git
               sudo rm -rf /var/www/model-viewer/*
               sudo cp -r ~/syz3/model-viewer /var/www/
-              sudo systemctl restart nginx=
+              sudo systemctl restart nginx
