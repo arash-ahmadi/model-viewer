@@ -29,7 +29,7 @@ jobs:
             port: ${{ secrets.PORT }}
             script: |
               cd ~/syz3/model-viewer
-              git pull # we pull any changes from git
+              git pull https://github.com/arash-ahmadi/model-viewer.git# we pull any changes from git
               sudo rm -rf /var/www/model-viewer/*
               sudo cp -r ~/syz3/model-viewer /var/www/
               sudo systemctl restart nginx # we reload the app via PM2
