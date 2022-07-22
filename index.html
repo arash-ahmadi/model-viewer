@@ -19,7 +19,7 @@
       // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
       let value = params.path; // "some_value"
       let html = `
-    <model-viewer class="model-viewer" bounds="tight" enable-pan src=${value} ar ar-modes="scene-viewer webxr quick-look" camera-controls 
+    <model-viewer class="model-viewer" bounds="tight" enable-pan src=${value} ar ar-modes="scene-viewer webxr quick-look" camera-controls with-credentials="true"
       environment-image="neutral" shadow-intensity="1" style="height: 100%; width: 100%; display: flex; flex-direction: row;">
       <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
