@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
     <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
-    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="focus-visible.js" defer></script>
+    <script src="jquery.js"></script>
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
@@ -20,7 +20,7 @@
       let value = params.path; // "some_value"
       let html = `
     <model-viewer class="model-viewer" bounds="tight" enable-pan src=${value} ar ar-modes="scene-viewer webxr quick-look" camera-controls
-      environment-image="neutral" shadow-intensity="1" style="height: 100%; width: 100%; display: flex; flex-direction: row;">
+      min-camera-orbit="Infinity 85deg auto" max-camera-orbit="Infinity 85deg auto" environment-image="neutral" shadow-intensity="1" style="height: 100%; width: 100%; display: flex; flex-direction: row;">
       <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
       </div>
