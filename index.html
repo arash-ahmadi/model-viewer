@@ -1,26 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>ViuBox SYZ - Model Viewer</title>
-    <meta charset="utf-8">
-    <meta name="description" content="ViuBox SYZ - Model Viewer">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="./styles.css" rel="stylesheet"/>
-    <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
-    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  </head>
-  <body>
-    <!-- <model-viewer> HTML element -->
-    <script>
-      const params = new Proxy(new URLSearchParams(window.location.search), {
-          get: (searchParams, prop) => searchParams.get(prop),
-        });
-      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let value = params.path; // "some_value"
-      let html = `
+
+<head>
+  <title>ViuBox SYZ - Model Viewer</title>
+  <meta charset="utf-8">
+  <meta name="description" content="ViuBox SYZ - Model Viewer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link type="text/css" href="./styles.css" rel="stylesheet" />
+  <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+  <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+  <!-- <model-viewer> HTML element -->
+  <script>
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+    let value = params.path; // "some_value"
+    let html = `
     <model-viewer class="model-viewer" bounds="tight" enable-pan src=${value} ar ar-modes="scene-viewer webxr quick-look" camera-controls
-      min-camera-orbit="Infinity 85deg auto" max-camera-orbit="Infinity 85deg auto" environment-image="https://d2y9k39na1ynsv.cloudfront.net/brown_photostudio_04_4k.hdr" xr-environment shadow-intensity="1" style="height: 100%; width: 100%; display: flex; flex-direction: row;">
+      min-camera-orbit="Infinity 85deg auto" max-camera-orbit="Infinity 85deg auto" environment-image="https://viubox-clothes.s3.us-east-2.amazonaws.com/test/brown_photostudio_04_1k.hdr" xr-environment shadow-intensity="1" style="height: 100%; width: 100%; display: flex; flex-direction: row;">
       <div class="progress-bar hide" slot="progress-bar">
         <div class="update-bar"></div>
       </div>
@@ -33,11 +35,34 @@
       <img class="logo" src="viubox_logo22.webp" alt="ViuBox SYZ Logo" draggable="false">
     </model-viewer>
     `
-    $('body').append(html);
-    </script>
-    <script src="script.js"></script>
-    <!-- Loads <model-viewer> for browsers: -->
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
-  </body>
+    let html2 = `
+    <model-viewer class="model-viewer" bounds="tight" enable-pan src=${value} ar ar-modes="scene-viewer webxr quick-look" camera-controls
+      min-camera-orbit="auto 85deg auto" max-camera-orbit="auto 85deg 2.5m" camera-target="-0.025m 0.75m 0m" environment-image="https://viubox-clothes.s3.us-east-2.amazonaws.com/test/brown_photostudio_04_1k.hdr" xr-environment shadow-intensity="1" min-field-of-view="30deg" style="height: 100%; width: 100%; display: flex; flex-direction: row;">
+      <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+      </div>
+      <button slot="ar-button" id="ar-button">
+        View in AR
+      </button>
+      <div id="ar-prompt">
+        <img src="ar_hand_prompt.png">
+      </div>
+      <img class="logo" src="viubox_logo22.webp" alt="ViuBox SYZ Logo" draggable="false">
+    </model-viewer>
+    `
+    if (params.reddress) {
+      $('body').append(html2);
+    }
+    else {
+      $('body').append(html);
+    }
+
+  </script>
+  <script src="script.js"></script>
+  <!-- Loads <model-viewer> for browsers: -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+</body>
+
 </html>
